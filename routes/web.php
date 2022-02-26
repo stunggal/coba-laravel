@@ -19,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home', [
-        'title' => 'Home'
+        'title' => 'Home',
+        'active' => 'home',
     ]);
 });
 
@@ -28,7 +29,8 @@ Route::get('/about', function () {
         "nama" => "wahid alfaridsi achmad zein",
         "email" => "walfaridsi@gmail.com",
         "img" => "img/me.jpeg",
-        'title' => 'About'
+        'title' => 'About',
+        'active' => 'about',
     ]);
 });
 
@@ -39,6 +41,7 @@ Route::get('/categories', function () {
     return view('categories', [
         'title' => 'categories',
         'categories' => Category::all(),
+        'active' => 'categories',
     ]);
 });
 
@@ -46,6 +49,7 @@ Route::get('/categories/{category:slug}', function (Category $category) {
     return view('posts', [
         'title' => "Post by category : $category->name",
         'posts' => $category->posts->load('category', 'user'),
+        'active' => 'categories',
     ]);
 });
 
