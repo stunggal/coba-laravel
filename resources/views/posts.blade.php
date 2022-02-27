@@ -1,7 +1,18 @@
 @extends('layout.main')
 
 @section('container')
-    <h1>{{ $title }}</h1>
+    <h1 class="mb-5 text-center">{{ $title }}</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form action="/blog">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Cari disini..." name="search" value="{{ request('search') }}">
+                    <button class="btn btn-primary" type="submit">Cari</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     @if ($posts->count())
     <div class="card mb-3">
@@ -18,9 +29,7 @@
             <a href="/post/{{ $posts[0]->slug }}" class="text-decoration-none btn btn-primary">Read more</a>
         </div>
     </div>
-    @else
-        <p class="text-center fs-4 ">No post found.</p>
-    @endif
+    
     <div class="container">
         <div class="row">
             @foreach ($posts->skip(1) as $p)
@@ -43,4 +52,10 @@
         </div>
     </div>
     
+    @else
+        <p class="text-center fs-4 ">No post found.</p>
+    @endif
+
+    {{ $posts->links() }}
+
 @endsection

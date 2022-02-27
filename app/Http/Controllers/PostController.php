@@ -12,7 +12,7 @@ class PostController extends Controller
         // $blog_posts = Post::all();
         return view('posts', [
             'title' => 'All Post',
-            'posts' =>  Post::with(['user', 'category'])->latest()->get(),
+            'posts' =>  Post::with(['user', 'category'])->latest()->filter(request(['search']))->paginate(7),
             'active' => 'posts',
         ]);
     }
